@@ -16,17 +16,18 @@ salt:
 
   # to overwrite map.jinja salt packages
   lookup:
-    salt-master: 'salt-master'
-    salt-minion: 'salt-minion'
-    salt-syndic: 'salt-syndic'
-    salt-cloud: 'salt-cloud'
-    salt-ssh: 'salt-ssh'
+    salt_master: 'salt-master'
+    salt_minion: 'salt-minion'
+    salt_syndic: 'salt-syndic'
+    salt_cloud: 'salt-cloud'
+    salt_ssh: 'salt-ssh'
+    pyinotify: 'python-pyinotify' the package to be installed for pyinotify
 
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/
   # * http://repo.saltstack.com/apt/debian/8/amd64/
-  release: 2016.11
+  release: "2016.11"
 
   # salt master config
   master:
@@ -87,26 +88,26 @@ salt:
 
     # optional engine configuration
     engines:
-      slack:
-        token: xoxp-XXXXX-XXXXXXX
-        control: True
-        valid_users:
-          - someuser
-          - otheruser
-        valid_commands:
-          - test.ping
-          - list_jobs
-        aliases:
-          list_jobs:
-            type: runner
-            cmd: jobs.list_jobs
+      - slack:
+          token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
+          control: True
+          valid_users:
+            - someuser
+            - otheruser
+          valid_commands:
+            - test.ping
+            - list_jobs
+          aliases:
+            list_jobs:
+              type: runner
+              cmd: jobs.list_jobs
 
     # optional: these reactors will be configured on the master
     # They override reactors configured in
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'master/deploy':
-      - /srv/salt/reactors/deploy.sls
+        - /srv/salt/reactors/deploy.sls
 
   # salt minion config:
   minion:
@@ -163,19 +164,19 @@ salt:
 
     # optional engine configuration
     engines:
-      slack:
-        token: xoxp-XXXXX-XXXXXXX
-        control: True
-        valid_users:
-          - someuser
-          - otheruser
-        valid_commands:
-          - test.ping
-          - list_jobs
-        aliases:
-          list_jobs:
-            type: runner
-            cmd: jobs.list_jobs
+      - slack:
+          token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
+          control: True
+          valid_users:
+            - someuser
+            - otheruser
+          valid_commands:
+            - test.ping
+            - list_jobs
+          aliases:
+            list_jobs:
+              type: runner
+              cmd: jobs.list_jobs
 
     # optional beacons configuration
     beacons:
@@ -196,7 +197,7 @@ salt:
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'minion/deploy':
-      - /srv/salt/reactors/deploy.sls
+        - /srv/salt/reactors/deploy.sls
 
   # salt cloud config
   cloud:
